@@ -107,5 +107,14 @@
   <ItemGroup>
     <Resource Include="flappybird.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="minecraft apple.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="minecraft_apple-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Golden_Apple_JE2_BE2-removebg-preview.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
