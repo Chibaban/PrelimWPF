@@ -23,5 +23,17 @@ namespace PrelimWPF
         {
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow Menu = new MainWindow();
+            Menu.Show();
+            this.Close();
+        }
     }
 }

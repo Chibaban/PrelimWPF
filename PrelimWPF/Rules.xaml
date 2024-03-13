@@ -5,11 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrelimWPF"
         mc:Ignorable="d"
-        Title="Rules" Height="533" Width="800">
+        Title="Rules" Height="533" Width="800" ResizeMode="NoResize">
     <Window.Background>
         <ImageBrush ImageSource="/Backg2.jpg"/>
     </Window.Background>
     <Grid>
-        
+        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" Text="The program will create an 8-bit decimal number at random and begin counting down from a predetermined time interval (which is 30 seconds) as soon as the game launches. Next, you'll try to translate the 8-bit decimal number into binary. A new number will be generated, the timer will be reset with a reduction, and the score will go up if the user completes the conversion successfully. After 11 rounds, the reduction should peak (this will take 10 seconds). The game is over when the round's countdown timer hits zero." Width="750" IsHitTestVisible="False" Height="300" VerticalAlignment="Center" FontSize="30" TextAlignment="Justify" FontFamily="Bell MT"/>
+        <Label Content="Gameplay" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Bernard MT Condensed"/>
+        <Button x:Name="btnBack" Content="Back" Margin="698,426,0,0" FontSize="20" Click="BtnExit_Click" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" Width="68"/>
+
     </Grid>
 </Window>
