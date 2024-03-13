@@ -38,7 +38,9 @@ namespace PrelimWPF
 
         private void btnRules_Click(object sender, RoutedEventArgs e)
         {
-
+            Rules rules = new Rules();
+            rules.Show();
+            this.Close();
         }
     }
 }
