@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace PrelimWPF
 {
@@ -29,14 +30,73 @@ namespace PrelimWPF
         int _plus128 = 0;
 
         int _rounds = 1;
-
         int _score = 0;
 
         Random _rnd = new Random();
 
+        bool _timerStatus = true;
+        DispatcherTimer _dt = null;
+        int _sec = 0;
+
+
         public Game()
         {
             InitializeComponent();
+            _dt = new DispatcherTimer();
+            _dt.Tick += _dt_Tick;
+            _dt.Interval = new TimeSpan(0, 0, 0, 1, 0);
+        }
+
+        private void _dt_Tick(object sender, EventArgs e)
+        {
+            _sec = int.Parse(tbTimer.Text.ToString());
+            _sec--;
+
+            if (_sec == 0)
+            {
+                _dt.Stop();
+                MessageBox.Show("Times up!");
+                btnStart.IsEnabled = true;
+                btnFinish.IsEnabled = false;
+                _sec = 30;
+
+                btn1.Content = "0";
+                btn2.Content = "0";
+                btn4.Content = "0";
+                btn8.Content = "0";
+                btn16.Content = "0";
+                btn32.Content = "0";
+                btn64.Content = "0";
+                btn128.Content = "0";
+
+                _plus1 = 0;
+                _plus2 = 0;
+                _plus4 = 0;
+                _plus8 = 0;
+                _plus16 = 0;
+                _plus32 = 0;
+                _plus64 = 0;
+                _plus128 = 0;
+
+                Apple.Source = new BitmapImage(new Uri("/minecraft_apple-removebg-preview.png", UriKind.RelativeOrAbsolute));
+                Apple2.Source = new BitmapImage(new Uri("/minecraft_apple-removebg-preview.png", UriKind.RelativeOrAbsolute));
+                Apple3.Source = new BitmapImage(new Uri("/minecraft_apple-removebg-preview.png", UriKind.RelativeOrAbsolute));
+                Apple4.Source = new BitmapImage(new Uri("/minecraft_apple-removebg-preview.png", UriKind.RelativeOrAbsolute));
+                Apple5.Source = new BitmapImage(new Uri("/minecraft_apple-removebg-preview.png", UriKind.RelativeOrAbsolute));
+                Apple6.Source = new BitmapImage(new Uri("/minecraft_apple-removebg-preview.png", UriKind.RelativeOrAbsolute));
+                Apple7.Source = new BitmapImage(new Uri("/minecraft_apple-removebg-preview.png", UriKind.RelativeOrAbsolute));
+                Apple8.Source = new BitmapImage(new Uri("/minecraft_apple-removebg-preview.png", UriKind.RelativeOrAbsolute));
+
+                tbRandomNum.Text = "";
+
+                _rounds = 1;
+                tbRounds.Text = _rounds.ToString();
+
+                _score = 0;
+                tbScore.Text = _score.ToString();
+            }
+
+            tbTimer.Text = _sec.ToString();
         }
 
         private void Btn1_Click(object sender, RoutedEventArgs e)
@@ -169,6 +229,8 @@ namespace PrelimWPF
 
         private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
+            _dt.Start();
+
             btnStart.IsEnabled = false;
             btnFinish.IsEnabled = true;
 
@@ -191,6 +253,21 @@ namespace PrelimWPF
 
             if (result.ToString() == tbRandomNum.Text.ToString())
             {
+                _dt.Stop();
+
+                _rounds++;
+                tbRounds.Text = _rounds.ToString();
+
+                double minus = _rounds * 0.066;
+                int roundTimer = 30 - (int)(30 * minus);
+                tbTimer.Text = roundTimer.ToString();
+
+                if (_rounds >= 11)
+                {
+                    _sec = 30;
+                    tbTimer.Text = _sec.ToString();
+                }
+
                 MessageBox.Show("Correct!");
                 btnStart.IsEnabled = true;
                 btnFinish.IsEnabled = false;
@@ -233,8 +310,7 @@ namespace PrelimWPF
 
                 tbRandomNum.Text = "";
 
-                _rounds++;
-                tbRounds.Text = _rounds.ToString();
+                
 
                 _score+= 5;
                 tbScore.Text = _score.ToString();
