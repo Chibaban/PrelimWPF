@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,10 +35,9 @@ namespace PrelimWPF
 
         Random _rnd = new Random();
 
-        bool _timerStatus = true;
         DispatcherTimer _dt = null;
+        DispatcherTimer _dtplaytime = null;
         int _sec = 0;
-
 
         public Game()
         {
@@ -45,6 +45,27 @@ namespace PrelimWPF
             _dt = new DispatcherTimer();
             _dt.Tick += _dt_Tick;
             _dt.Interval = new TimeSpan(0, 0, 0, 1, 0);
+
+            _dtplaytime = new DispatcherTimer();
+            _dtplaytime.Tick += _dtplaytime_Tick;
+            _dtplaytime.Interval = new TimeSpan(0, 0, 0, 1, 0);
+        }
+
+        private void _dtplaytime_Tick(object sender, EventArgs e)
+        {
+            int sec = int.Parse(tbplaytimeSec.Text.ToString());
+            int min = int.Parse(tbplaytimeMin.Text.ToString());
+
+            sec++;
+
+            if (sec == 60)
+            {
+                sec = 0;
+                min++;
+            }
+
+            tbplaytimeSec.Text = sec.ToString();
+            tbplaytimeMin.Text = min.ToString();
         }
 
         private void _dt_Tick(object sender, EventArgs e)
@@ -54,8 +75,14 @@ namespace PrelimWPF
 
             if (_sec == 0)
             {
+                string totalplayedtime = tbplaytimeMin.Text.ToString() + ":" + tbplaytimeSec.Text.ToString();
+                _dtplaytime.Stop();
+
+                string playername = UsernameWindow();
+                Recorded(playername, _score, totalplayedtime);
+
                 _dt.Stop();
-                MessageBox.Show("Times up!");
+
                 btnStart.IsEnabled = true;
                 btnFinish.IsEnabled = false;
                 _sec = 30;
@@ -94,9 +121,39 @@ namespace PrelimWPF
 
                 _score = 0;
                 tbScore.Text = _score.ToString();
+
+                Leaderboard();
+                this.Close();
             }
 
             tbTimer.Text = _sec.ToString();
+        }
+
+        private string UsernameWindow()
+        {
+            string userInput = "";
+            Playername playername = new Playername();
+
+            if (playername.ShowDialog() == true)
+            {
+                userInput = playername.uInput;
+            }
+
+            return userInput;
+        }
+
+        private void Recorded(string username, int score, string playtime)
+        {
+            using (StreamWriter sw = new StreamWriter("LeaderboardsContent.csv", true))
+            {
+                sw.WriteLine($"{username},{score},{playtime}");
+            }
+        }
+
+        private void Leaderboard()
+        {
+            Leaderboards leaderboards = new Leaderboards();
+            leaderboards.Show();
         }
 
         private void Btn1_Click(object sender, RoutedEventArgs e)
@@ -230,6 +287,7 @@ namespace PrelimWPF
         private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
             _dt.Start();
+            _dtplaytime.Start();
 
             btnStart.IsEnabled = false;
             btnFinish.IsEnabled = true;
@@ -245,6 +303,8 @@ namespace PrelimWPF
 
             int rnd = _rnd.Next(0, 256);
             tbRandomNum.Text = rnd.ToString();
+
+            btnBack.IsEnabled = false;
         }
 
         private void BtnFinish_Click(object sender, RoutedEventArgs e)
@@ -254,6 +314,7 @@ namespace PrelimWPF
             if (result.ToString() == tbRandomNum.Text.ToString())
             {
                 _dt.Stop();
+                _dtplaytime.Start();
 
                 _rounds++;
                 tbRounds.Text = _rounds.ToString();
@@ -264,7 +325,7 @@ namespace PrelimWPF
 
                 if (_rounds >= 11)
                 {
-                    _sec = 30;
+                    _sec = 10;
                     tbTimer.Text = _sec.ToString();
                 }
 

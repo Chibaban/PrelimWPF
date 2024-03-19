@@ -44,5 +44,7 @@
         <TextBox x:Name="tbRounds" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Height="40" FontSize="30" TextAlignment="Center" IsHitTestVisible="False" BorderBrush="Black" HorizontalAlignment="Left" Width="56" Margin="112,17,0,0"/>
         <Label Content="Score:" HorizontalAlignment="Left" Margin="206,22,0,0" VerticalAlignment="Top" FontSize="24" FontFamily="Bernard MT Condensed"/>
         <TextBox x:Name="tbScore" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="40" FontSize="30" TextAlignment="Center" IsHitTestVisible="False" BorderBrush="Black" HorizontalAlignment="Left" Width="56" Margin="280,18,0,0"/>
+        <TextBox x:Name="tbplaytimeSec" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="40" FontSize="30" TextAlignment="Center" IsHitTestVisible="False" BorderBrush="Black" HorizontalAlignment="Left" Width="56" Margin="-137,123,0,0" />
+        <TextBox x:Name="tbplaytimeMin" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="40" FontSize="30" TextAlignment="Center" IsHitTestVisible="False" BorderBrush="Black" HorizontalAlignment="Left" Width="56" Margin="-137,181,0,0" />
     </Grid>
 </Window>

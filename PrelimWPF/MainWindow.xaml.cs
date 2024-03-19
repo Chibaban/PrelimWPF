@@ -26,7 +26,9 @@ namespace PrelimWPF
         }
         private void btnLeaderboards_Click(object sender, RoutedEventArgs e)
         {
-
+            Leaderboards leaderboards = new Leaderboards();
+            leaderboards.Show();
+            this.Close();
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
