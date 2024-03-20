@@ -10,7 +10,7 @@
         <ImageBrush ImageSource="/Backg2.jpg"/>
     </Window.Background>
     <Grid>
-        <TextBox x:Name ="tbUsername" HorizontalAlignment="Center" Height="63" Margin="0,221,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="365" FontSize="60" Background="#FF6EDEDB" BorderBrush="#FF204DD6" SelectionBrush="#FF204DD6" FontFamily="Bell MT" Foreground="#FF204DD6"/>
+        <TextBox x:Name ="tbUsername" HorizontalAlignment="Center" Height="78" Margin="0,221,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="365" FontSize="60" Background="#FF6EDEDB" BorderBrush="#FF204DD6" SelectionBrush="#FF204DD6" FontFamily="Bell MT" Foreground="#FF204DD6"/>
         <Label Content="Enter Name" HorizontalAlignment="Center" Margin="0,119,0,0" VerticalAlignment="Top" FontSize="48" FontFamily="Bernard MT Condensed"/>
         <Button x:Name="btnEnter" Content="Enter" HorizontalAlignment="Center" Margin="0,338,0,0" VerticalAlignment="Top" Height="57" Width="365" FontSize="30" Click="btnPlay_Click" FontFamily="Bernard MT Condensed"/>
 

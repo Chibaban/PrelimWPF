@@ -70,7 +70,7 @@ namespace PrelimWPF
 
         private void _dt_Tick(object sender, EventArgs e)
         {
-            _sec = int.Parse(tbTimer.Text.ToString());
+            _sec = int.Parse(lbTimer.Content.ToString());
             _sec--;
 
             if (_sec == 0)
@@ -114,19 +114,19 @@ namespace PrelimWPF
                 Apple7.Source = new BitmapImage(new Uri("/minecraft_apple-removebg-preview.png", UriKind.RelativeOrAbsolute));
                 Apple8.Source = new BitmapImage(new Uri("/minecraft_apple-removebg-preview.png", UriKind.RelativeOrAbsolute));
 
-                tbRandomNum.Text = "";
+                lbRandomNum.Content = "";
 
                 _rounds = 1;
-                tbRounds.Text = _rounds.ToString();
+                lbRounds.Content = _rounds.ToString();
 
                 _score = 0;
-                tbScore.Text = _score.ToString();
+                lbScore.Content = _score.ToString();
 
                 Leaderboard();
                 this.Close();
             }
 
-            tbTimer.Text = _sec.ToString();
+            lbTimer.Content = _sec.ToString();
         }
 
         private string UsernameWindow()
@@ -302,7 +302,7 @@ namespace PrelimWPF
             btn128.IsEnabled = true;
 
             int rnd = _rnd.Next(0, 256);
-            tbRandomNum.Text = rnd.ToString();
+            lbRandomNum.Content = rnd.ToString();
 
             btnBack.IsEnabled = false;
         }
@@ -311,22 +311,22 @@ namespace PrelimWPF
         {
             int result = _plus1 + _plus2 + _plus4 + _plus8 + _plus16 + _plus32 + _plus64 + _plus128;
 
-            if (result.ToString() == tbRandomNum.Text.ToString())
+            if (result.ToString() == lbRandomNum.Content.ToString())
             {
                 _dt.Stop();
                 _dtplaytime.Start();
 
                 _rounds++;
-                tbRounds.Text = _rounds.ToString();
+                lbRounds.Content = _rounds.ToString();
 
                 double minus = _rounds * 0.066;
                 int roundTimer = 30 - (int)(30 * minus);
-                tbTimer.Text = roundTimer.ToString();
+                lbTimer.Content = roundTimer.ToString();
 
                 if (_rounds >= 11)
                 {
                     _sec = 10;
-                    tbTimer.Text = _sec.ToString();
+                    lbTimer.Content = _sec.ToString();
                 }
 
                 MessageBox.Show("Correct!");
@@ -369,12 +369,10 @@ namespace PrelimWPF
                 Apple7.Source = new BitmapImage(new Uri("/minecraft_apple-removebg-preview.png", UriKind.RelativeOrAbsolute));
                 Apple8.Source = new BitmapImage(new Uri("/minecraft_apple-removebg-preview.png", UriKind.RelativeOrAbsolute));
 
-                tbRandomNum.Text = "";
-
-                
+                lbRandomNum.Content = "";
 
                 _score+= 5;
-                tbScore.Text = _score.ToString();
+                lbScore.Content = _score.ToString();
             }
             else
             {
