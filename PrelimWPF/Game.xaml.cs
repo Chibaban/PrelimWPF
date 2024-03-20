@@ -75,7 +75,7 @@ namespace PrelimWPF
 
             if (_sec == 0)
             {
-                string totalplayedtime = tbplaytimeMin.Text.ToString() + ":" + tbplaytimeSec.Text.ToString();
+                string totalplayedtime = tbplaytimeMin.Text.ToString() + "m :" + tbplaytimeSec.Text.ToString() + "secs";
                 _dtplaytime.Stop();
 
                 string playername = UsernameWindow();
